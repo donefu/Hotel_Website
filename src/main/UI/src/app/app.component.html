@@ -1,10 +1,19 @@
 
 
 <header id="intro" style="display: block;">
+
   <article class="fullheight" style="height: 568px;">
+    <!-- Menu to choose Eng or FR to display message -->
+    <select [(ngModel)]="default_Language" (change)="on_Language_Switch($event)" style="margin-right: 10px; margin-top: 18px">
+      <option value="en">English (US)</option>
+      <option value="fr">French (CA_FR)</option>
+    </select>
     <div class="hgroup">
-      <h1>Landon Hotel</h1>
+      <h1>Landon Hotel </h1>
       <h2>London, Ontario</h2>
+      <h3 style="color: white; font-weight: bolder; margin-top: 10px" *ngIf="default_Language === 'en'">{{ welcome_US }}</h3>
+      <h3 style="color: white; font-weight: bolder" *ngIf="default_Language === 'fr'">{{ welcome_FR }}</h3>
+
       <p><a href="/#welcome"><img src="assets/images/arrow.png" alt="down arrow"></a></p>
     </div>
   </article>
@@ -23,7 +32,7 @@
   <div class="scene" id="welcome">
     <article class="content">
 
- 
+
 
       <div class="row">
         <div class=""col-12>
@@ -58,7 +67,7 @@
               </div>
               </form>
 
-        
+
         </div>
       </div>
 

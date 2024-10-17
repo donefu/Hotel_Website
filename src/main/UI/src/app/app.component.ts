@@ -22,6 +22,11 @@ export class AppComponent implements OnInit{
   private getUrl:string = this.baseURL + '/room/reservation/v1/';
   private postUrl:string = this.baseURL + '/room/reservation/v1';
   public submitted!:boolean;
+  // Add message and array message here
+  welcome_US: string = '';
+  welcome_FR: string = '';
+  default_Language = 'en';
+  //
   roomsearch! : FormGroup;
   rooms! : Room[];
   request!:ReserveRoomRequest;
@@ -35,6 +40,10 @@ export class AppComponent implements OnInit{
       });
 
  //     this.rooms=ROOMS;
+
+      // English message
+     this.get_welcome_US().subscribe((mess : string) => {this.welcome_US = mess; console.log(this.welcome_US)});
+      this.get_welcome_FR().subscribe((mess : string) => {this.welcome_FR = mess; console.log(this.welcome_FR)});
 
 
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
@@ -82,8 +91,17 @@ export class AppComponent implements OnInit{
 
        return this.httpClient.get(this.baseURL + '/room/reservation/v1?checkin='+ this.currentCheckInVal + '&checkout='+this.currentCheckOutVal, {responseType: 'json'});
     }
+    get_welcome_US(): Observable<string> {
+      return this.httpClient.get(this.baseURL + '/welcome/welcome_message_US', {responseType: 'text'});
+    }
 
+    get_welcome_FR(): Observable<string> {
+    return this.httpClient.get(this.baseURL + '/welcome/welcome_message_FR', {responseType: 'text'});
   }
+  on_Language_Switch(event: any) {
+    this.default_Language = event.target.value;
+  }
+}
 
 
 
