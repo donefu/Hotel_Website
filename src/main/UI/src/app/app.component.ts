@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
   welcome_US: string = '';
   welcome_FR: string = '';
   default_Language = 'en';
+  time_zone: string = '';
   //
   roomsearch! : FormGroup;
   rooms! : Room[];
@@ -42,8 +43,9 @@ export class AppComponent implements OnInit{
  //     this.rooms=ROOMS;
 
       // English message
-     this.get_welcome_US().subscribe((mess : string) => {this.welcome_US = mess; console.log(this.welcome_US)});
+      this.get_welcome_US().subscribe((mess : string) => {this.welcome_US = mess; console.log(this.welcome_US)});
       this.get_welcome_FR().subscribe((mess : string) => {this.welcome_FR = mess; console.log(this.welcome_FR)});
+      this.get_time_zone().subscribe((time : string) => {this.time_zone = time; console.log(this.time_zone)})
 
 
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
@@ -98,9 +100,13 @@ export class AppComponent implements OnInit{
     get_welcome_FR(): Observable<string> {
     return this.httpClient.get(this.baseURL + '/welcome/welcome_message_FR', {responseType: 'text'});
   }
-  on_Language_Switch(event: any) {
+    on_Language_Switch(event: any) {
     this.default_Language = event.target.value;
-  }
+    }
+
+    get_time_zone(): Observable<string>{
+      return this.httpClient.get(this.baseURL + '/time/zones', {responseType: 'text'}) as Observable<string>;
+    }
 }
 
 

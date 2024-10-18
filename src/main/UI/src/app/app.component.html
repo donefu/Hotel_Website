@@ -4,15 +4,11 @@
 
   <article class="fullheight" style="height: 568px;">
     <!-- Menu to choose Eng or FR to display message -->
-    <select [(ngModel)]="default_Language" (change)="on_Language_Switch($event)" style="margin-right: 10px; margin-top: 18px">
-      <option value="en">English (US)</option>
-      <option value="fr">French (CA_FR)</option>
-    </select>
+
     <div class="hgroup">
       <h1>Landon Hotel </h1>
       <h2>London, Ontario</h2>
-      <h3 style="color: white; font-weight: bolder; margin-top: 10px" *ngIf="default_Language === 'en'">{{ welcome_US }}</h3>
-      <h3 style="color: white; font-weight: bolder" *ngIf="default_Language === 'fr'">{{ welcome_FR }}</h3>
+
 
       <p><a href="/#welcome"><img src="assets/images/arrow.png" alt="down arrow"></a></p>
     </div>
@@ -24,12 +20,14 @@
     <nav id="nav" style="position: relative; top: 0; left: 0; bottom: auto; right: auto; width: 100%;">
       <div class="navbar">
         <div class="brand"><a href="/#welcome">Landon <span>Hotel</span></a></div>
+        <h3 style="color: aliceblue; font-weight: lighter; padding-left: 3px">{{ welcome_US }} / {{welcome_FR}}</h3>
       </div><!-- navbar -->
     </nav>
   </div>
 </header>
 <main id="wrapper">
   <div class="scene" id="welcome">
+    <div style="color: black; font-size: large; text-align: center;">{{time_zone}} </div>
     <article class="content">
 
 
@@ -85,8 +83,9 @@
                 <td>
                   <strong>Room #: {{room.roomNumber}}</strong><br/>
                   <strong>Price: ${{room.price}}</strong>
-                  <strong>C${{room.price}}</strong><br/>
-                  <strong>€{{room.price}}</strong><br/>
+                  <strong>Price: C${{room.price}}</strong>
+                  <strong>Price: €{{room.price}}</strong>
+
                 </td>
                 <td>
                   <button type="submit" class="btn btn-primary" (click)="reserveRoom(room.id)">Reserve</button>
